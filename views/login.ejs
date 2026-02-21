@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>HSC Auth — Login</title>
+	</head>
+
+	<body>
+		<h1>HSC Auth</h1>
+		<p>PR1 — tela simples de login (placeholder)</p>
+
+		<form method="post" action="#">
+			<label>
+				Email
+				<input
+					type="email"
+					name="email"
+					placeholder="voce@dominio.com"
+					required
+				/>
+			</label>
+
+			<input type="hidden" name="returnUrl" value="<%= returnUrl %>" />
+
+			<button type="submit">Continuar</button>
+		</form>
+	</body>
+</html>
