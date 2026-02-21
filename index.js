@@ -1,6 +1,5 @@
 console.log("BOOTING HSC-AUTH...");
 
-import express from "express";
 import Fastify from "fastify";
 import path from "node:path";
 import view from "@fastify/view";
@@ -11,35 +10,28 @@ import fastifyStatic from "@fastify/static";
 import healthRoutes from "./src/routes/health.js";
 import authRoutes from "./src/routes/auth.js";
 
-const fastify = Fastify({ logger: true });
+const app = Fastify({ logger: true });
 
 // Views
-fastify.register(view, {
+app.register(view, {
   engine: { ejs },
   root: path.join(process.cwd(), "views"),
   viewExt: "ejs",
 });
 
-fastify.register(formbody);
+app.register(formbody);
 
-fastify.register(fastifyStatic, {
+app.register(fastifyStatic, {
   root: path.join(process.cwd(), "public"),
   prefix: "/public/",
 });
 
-fastify.register(healthRoutes);
-fastify.register(authRoutes);
-
-const app = express();
-
-// Quando Fastify estiver pronto, encaminha tudo para o servidor interno dele
-app.use(async (req, res) => {
-  await fastify.ready();
-  fastify.server.listeners("request")[0](req, res);
-});
+app.register(healthRoutes);
+app.register(authRoutes);
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Listening on :${PORT}`);
+app.listen({ port: PORT, host: "0.0.0.0" }).catch((err) => {
+  app.log.error(err);
+  process.exit(1);
 });
