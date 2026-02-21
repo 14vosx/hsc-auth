@@ -1,3 +1,5 @@
+console.log("BOOTING HSC-AUTH...");
+
 import express from "express";
 import { createServer } from "node:http";
 import Fastify from "fastify";
