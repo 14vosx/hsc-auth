@@ -1,17 +1,14 @@
-import express from "express";
+import { buildServer } from "./src/server.js";
 
-const app = express();
 const port = Number(process.env.PORT || 3000);
+const host = "0.0.0.0";
 
-app.get("/health", (_req, res) => {
-  res.status(200).json({ ok: true, service: "hsc-auth", ts: new Date().toISOString() });
-});
+const server = await buildServer();
 
-app.get("/", (_req, res) => {
-  res.status(200).send("HSC AUTH OK (Hostinger)");
-});
-
-// IMPORTANTE: 0.0.0.0 e PORT do ambiente
-app.listen(port, "0.0.0.0", () => {
-  console.log(`[hsc-auth] listening on http://0.0.0.0:${port}`);
-});
+try {
+	await server.listen({ port, host });
+	console.log(`[hsc-auth] listening on http://${host}:${port}`);
+} catch (err) {
+	console.error(err);
+	process.exit(1);
+}
