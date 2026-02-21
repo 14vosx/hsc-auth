@@ -1,9 +1,14 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.set("view engine", "ejs");
-app.set("views", new URL("./views", import.meta.url).pathname);
+app.set("views", path.join(__dirname, "views"));
 
 // Hostinger injeta PORT. Mantemos fallback local.
 const port = Number(process.env.PORT || 3000);
