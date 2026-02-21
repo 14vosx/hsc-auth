@@ -1,21 +1,23 @@
 <!doctype html>
 <html lang="pt-br">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>HSC — Login</title>
-	</head>
-	<body>
-		<h1>Login</h1>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HSC Auth — Login</title>
+</head>
+<body>
+  <h1>Login</h1>
 
-		<form method="post" action="#">
-			<label>Email</label><br />
-			<input name="email" type="email" placeholder="seu@email.com" required />
-			<input type="hidden" name="returnUrl" value="<%= returnUrl %>" />
-			<br /><br />
-			<button type="submit" disabled>Enviar link (PR2)</button>
-		</form>
+  <form method="post" action="/auth/magic/request">
+    <label>
+      Email
+      <input type="email" name="email" required />
+    </label>
 
-		<p><small>PR1: página placeholder. Magic link entra no PR2.</small></p>
-	</body>
+    <input type="hidden" name="returnUrl" value="<%= returnUrl %>" />
+
+    <button type="submit" disabled>Enviar link (PR2)</button>
+    <p><small>PR1: tela placeholder. Envio do link entra no PR2.</small></p>
+  </form>
+</body>
 </html>
