@@ -30,8 +30,9 @@ app.register(healthRoutes);
 app.register(authRoutes);
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3000;
+console.log("ENV PORT =", process.env.PORT, "-> using", PORT);
 
-app.listen({ port: PORT, host: "0.0.0.0" }).catch((err) => {
+app.listen({ port: PORT, host: "127.0.0.1" }).catch((err) => {
   app.log.error(err);
   process.exit(1);
 });
