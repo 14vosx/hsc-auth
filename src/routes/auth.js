@@ -8,4 +8,8 @@ export default async function authRoutes(app) {
 	app.get("/login/sent", async (req, reply) => {
 		return reply.view("sent");
 	});
+
+	app.get("/", async (req, reply) => {
+  	return reply.redirect("/login");
+	});
 }
